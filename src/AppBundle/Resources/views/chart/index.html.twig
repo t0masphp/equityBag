@@ -1,0 +1,66 @@
+{% if app.user.hasShares %}
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+    <div id="chart_div"></div>
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load('visualization', '1', {'packages': ['corechart']});
+        google.setOnLoadCallback(drawchart);
+        function drawchart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('date', 'Time');
+            data.addColumn('number', 'Price');
+            var options = {
+                explorer: {
+                    axis: 'horizontal',
+                    maxZoomIn: .1
+                },
+                hAxis: {
+                    title: 'Time'
+                },
+                vAxis: {
+                    title: 'Price'
+                },
+                colors: ['#000'],
+                crosshair: {
+                    color: '#000',
+                    trigger: 'selection'
+                }
+            };
+            var chartContainer = $('#chart_div');
+            $.ajax({
+                url: "{{ url('chart_shares_ajax') }}"
+            })
+                    .done(function (result) {
+                        //set data
+                        for (var i in result) {
+                            var row = result[i];
+                            var dataRow = [new Date(row['date']), row['cost']];
+                            data.addRow(dataRow);
+                        }
+                        var chart = new google.visualization.LineChart(chartContainer[0]);
+
+                        $('.sk-circle').hide();
+                        chart.draw(data, options);
+                    }).fail(function (error) {
+                        $('.sk-circle').hide();
+                        chartContainer.html('Yahoo finaice api return: ' + error.status + ' ' + error.statusText);
+
+                    });
+        }
+    </script>
+{% else %}
+    You have no added shares.
+{% endif %}

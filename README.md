@@ -1,69 +1,15 @@
-Symfony Standard Edition
+Portfolio chart
 ========================
+Описание:
+  * На главной странице выводиться график(его возможно масштабировать, строиться по всем датам отданым яхой)
+  * Если пользователь не авторизован, ему будет сообщение об этом.
+  * После регистрации или авторизации, появиться пункт Shares (CRUD) Акций, там можно добавлять в портфель акций нужное количество. Реализовано автодополнение.
+  * Реализовано 2 api, через csv и yql запросы. Оба к сожалению работают нестабильно, по причине того что yahoo не возвращает данные или же показывает 404.
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Реализовать на PHP с использованием Symfony приложение со следующим функционалом:
 
-What's inside?
---------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * An AppBundle you can use to start coding;
-
-  * Twig as the only configured template engine;
-
-  * Doctrine ORM/DBAL;
-
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+  * Регистрация / авторизация пользователей. (Около часа, включая добавление bootstrap)
+  * Создание портфеля акций (5-6 акций достаточно) для пользователя: стандартный CRUD. (Около часа. (Генерация была через petkopara/crud-generator-bundle (Бутстрап + фильтры) +  Убрать привязку users и вынести в контроллер текущего) + автодополнение)
+  * Данные должны скачиваться с Yahoo Finance. (Часа 2,5, при этом около часа только разбирался с Яхой, где что можно взять. Считать стал только по сумме открытия.)
+  * Сделать вывод графика "стоимость портфеля от времени" за 2 последних года по выбранным в п.2 акциям. (Минут 30, нашел примерный график у гугла, и взял за основу.)
